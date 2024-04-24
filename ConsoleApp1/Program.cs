@@ -12,7 +12,7 @@ static int ReadInteger(bool acceptEmptyValue = false)
 
                 if (string.IsNullOrEmpty(input))
                 {
-                    return -1; // return -1
+                    return -1; // return -1 if value is empty
                 }
 
             }
