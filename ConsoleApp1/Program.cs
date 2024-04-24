@@ -1,12 +1,23 @@
 ﻿
 #region Utility functions
-static int ReadInteger()
+static int ReadInteger(bool acceptEmptyValue = false)
 {
     while (true)
     {
         try
         {
-            return Convert.ToInt32(Console.ReadLine());
+            string input = Console.ReadLine().Trim();
+            if (acceptEmptyValue)
+            {
+
+                if (string.IsNullOrEmpty(input))
+                {
+                    return -1; // return -1
+                }
+
+            }
+
+            return Convert.ToInt32(input);
         }
         catch (FormatException)
         {
@@ -46,7 +57,7 @@ static string ReadStringNotEmpty()
 
 
 #region Task1
-int getMax(int number1, int number2, int number3)
+int GetMax(int number1, int number2, int number3)
 {
     int[] numArr = { number1, number2, number3 };
 
@@ -61,13 +72,14 @@ int getMax(int number1, int number2, int number3)
 
 try
 {
+    Console.WriteLine("Tast 1");
     Console.WriteLine("3 eded daxil edin ve en boyuyunu alin");
 
     int num1 = ReadInteger();
     int num2 = ReadInteger();
     int num3 = ReadInteger();
 
-    Console.WriteLine("{0}, {1}, {2} ededlerinden en boyuyu: {3}", num1, num2, num3, getMax(num1, num2, num3));
+    Console.WriteLine("{0}, {1}, {2} ededlerinden en boyuyu: {3}", num1, num2, num3, GetMax(num1, num2, num3));
 
     Console.WriteLine("*******************************************************************");
     Console.WriteLine("*******************************************************************");
@@ -75,9 +87,9 @@ try
     Console.WriteLine("");
     Console.WriteLine("");
 }
-catch (FormatException)
+catch (Exception e)
 {
-    Console.WriteLine("Zehmet olmasa, dogru tipde eded daxil edin.");
+    Console.WriteLine(e.Message);
 }
 #endregion;
 
@@ -85,6 +97,7 @@ catch (FormatException)
 
 try
 {
+    Console.WriteLine("Tast 2");
     Console.WriteLine("2 eded daxil edin ve deyerlerini deyishin");
     int number1 = ReadInteger();
     int number2 = ReadInteger();
@@ -109,9 +122,9 @@ try
     Console.WriteLine("");
 }
 
-catch (FormatException)
+catch (Exception e)
 {
-    Console.WriteLine("Zehmet olmasa, dogru tipde eded daxil edin.");
+    Console.WriteLine(e.Message);
 }
 
 #endregion;
@@ -120,6 +133,7 @@ catch (FormatException)
 #region Task3
 try
 {
+    Console.WriteLine("Tast 3");
     void ConsoleSum()
     {
         Console.WriteLine("2 eded daxil edin ve cemlerini alin");
@@ -139,14 +153,14 @@ try
     Console.WriteLine("");
     Console.WriteLine("");
 }
-catch (FormatException)
+catch (Exception e)
 {
-    Console.WriteLine("Zehmet olmasa, dogru tipde eded daxil edin.");
+    Console.WriteLine(e.Message);
 }
 #endregion;
 
 #region Task4
-
+Console.WriteLine("Tast 4");
 int[] numArr = { 10, 5, 8, 20, 15 };
 
 void GetMaxFromArr(int[] numArr)
@@ -175,13 +189,18 @@ Console.WriteLine("");
 #endregion;
 
 #region Task5
+Console.WriteLine("Tast 5");
 int GetSquare(int num1 = 2)
 {
     return num1 * num1;
 }
 
-Console.WriteLine("16 nin kvadrati {0}", GetSquare(16));
-Console.WriteLine("default ededin (2) kvadrati {0}", GetSquare());
+Console.WriteLine("Bir eded daxil edin ve kvadratini oyrenin, eger daxil etmesez default deyerin (2) kvadrati tapilacaq.");
+
+int reqem = ReadInteger(true);
+
+if(reqem != -1) Console.WriteLine("{0} - in kvadrati {1}", reqem, GetSquare(reqem));
+else Console.WriteLine("default ededin (2) kvadrati {0}", GetSquare());
 
 Console.WriteLine("*******************************************************************");
 Console.WriteLine("*******************************************************************");
@@ -191,7 +210,7 @@ Console.WriteLine("");
 #endregion;
 
 #region Task6
-
+Console.WriteLine("Tast 6");
 Console.WriteLine("Text daxil edin ve uzunlugunu oyrenin");
 string text = ReadStringNotEmpty();
 
@@ -201,8 +220,5 @@ int GetLengthOfText(string text)
     Thread.Sleep(1000);
     return text.Length;
 }
-
 Console.WriteLine("\"{0}\" uzunlugu {1}", text, GetLengthOfText(text));
-
-
 #endregion;
