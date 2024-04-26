@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Methods", "Methods\Methods.csproj", "{601CB272-466A-4B7C-AC83-9F27E79B0606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Methods", "Methods\Methods.csproj", "{601CB272-466A-4B7C-AC83-9F27E79B0606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{632FDD08-3BDC-484B-BF55-4276E649B7CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{632FDD08-3BDC-484B-BF55-4276E649B7CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "practiceArraySort", "practiceArraySort\practiceArraySort.csproj", "{D2E5FDAF-62DA-4BB2-90EC-441C10D06FBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{632FDD08-3BDC-484B-BF55-4276E649B7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{632FDD08-3BDC-484B-BF55-4276E649B7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{632FDD08-3BDC-484B-BF55-4276E649B7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2E5FDAF-62DA-4BB2-90EC-441C10D06FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2E5FDAF-62DA-4BB2-90EC-441C10D06FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2E5FDAF-62DA-4BB2-90EC-441C10D06FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2E5FDAF-62DA-4BB2-90EC-441C10D06FBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
