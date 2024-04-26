@@ -6,7 +6,7 @@ List<int> arrList = new List<int>();
 
 int currentInputNum;
 int currentInputIndex = 0;
-bool finishLoop = false;
+bool finishArray = false;
 bool startMenu = true;
 
 try
@@ -20,11 +20,11 @@ try
         {
             case 1:
                 Console.WriteLine("Arrayi daxil edin, chixmaq uchun reqem olmayan ededlerden birine clickleyin");
-                while (!finishLoop)
+                while (!finishArray)
                 {
                     Console.WriteLine($"Arraydaki {currentInputIndex}. index daxil edin");
 
-                    finishLoop = !(int.TryParse(Console.ReadLine(), out currentInputNum));
+                    finishArray = !(int.TryParse(Console.ReadLine(), out currentInputNum));
                     Console.WriteLine($"Arraydaki {currentInputIndex++}. index: {currentInputNum}");
                     arrList.Add(currentInputNum);
                 }
@@ -37,7 +37,7 @@ try
                 break;
 
             case 3:
-                if (arrList == null) throw new NullReferenceException();
+                if (!arrList.Any()) throw new NullReferenceException();
                 Console.WriteLine("bubble sort ile azalan sira: " + string.Join(", ", BubbleSortArray([.. arrList], "desc")));
                 startMenu = false;
                 break;
@@ -50,7 +50,8 @@ try
 catch (ArgumentException ex)
 {
     LogConsole(ex.Message);
-}catch (NullReferenceException)
+}
+catch (NullReferenceException)
 {
     LogConsole("Array boshdur evvelce deyer daxil edin");
 }
@@ -60,6 +61,7 @@ catch (FormatException)
 }
 
 
+#region Utilities
 void LogConsole(string msg)
 {
     Console.ForegroundColor = ConsoleColor.White;
@@ -97,3 +99,4 @@ int[] BubbleSortArray(int[] array, string type = "asc")
     return array;
 };
 
+#endregion;
