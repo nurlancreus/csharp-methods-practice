@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 List<int> arrList = new List<int>();
 
-int currentInputNum;
+//int currentInputNum;
 int currentInputIndex = 0;
 bool finishArray = false;
 bool startMenu = true;
@@ -24,7 +24,7 @@ try
                 {
                     Console.WriteLine($"Arraydaki {currentInputIndex}. index daxil edin");
 
-                    finishArray = !(int.TryParse(Console.ReadLine(), out currentInputNum));
+                    finishArray = !int.TryParse(Console.ReadLine(), out int currentInputNum);
                     Console.WriteLine($"Arraydaki {currentInputIndex++}. index: {currentInputNum}");
                     arrList.Add(currentInputNum);
                 }

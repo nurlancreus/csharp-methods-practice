@@ -8,12 +8,9 @@ namespace OOP_tasks_part1.Entities
 {
     internal class Acer : Computer
     {
-        public Acer(string model, int ram, string cpu)
+        public Acer(string model, int ram, string cpu) : base("Acer", model, ram, cpu)
         {
-            this.Brand = "Acer";
-            this.Model = model;
-            this.Ram = ram;
-            this.Cpu = cpu;
+
         }
     }
 }

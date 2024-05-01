@@ -8,12 +8,9 @@ namespace OOP_tasks_part1.Entities
 {
     internal class Asus : Computer
     {
-        public Asus(string model, int ram, string cpu)
+        public Asus(string model, int ram, string cpu) : base("Asus", model, ram, cpu)
         {
-            this.Brand = "Asus";
-            this.Model = model;
-            this.Ram = ram;
-            this.Cpu = cpu;
+
         }
     }
 }
