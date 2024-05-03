@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "practiceArraySort", "practiceArraySort\practiceArraySort.csproj", "{D2E5FDAF-62DA-4BB2-90EC-441C10D06FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP", "OOP\OOP.csproj", "{2F7AD77B-9F4E-4AA4-94FD-4EC973DD0454}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP", "OOP\OOP.csproj", "{2F7AD77B-9F4E-4AA4-94FD-4EC973DD0454}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP-tasks-part1", "OOP-tasks-part1\OOP-tasks-part1.csproj", "{2AAFA030-DD23-484B-8B10-692FFE14220E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP-part1-tasks", "OOP-tasks-part1\OOP-part1-tasks.csproj", "{2AAFA030-DD23-484B-8B10-692FFE14220E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP-part2-tasks", "OOP-part2\OOP-part2-tasks.csproj", "{4E14292B-0648-4B51-9364-4467D6D3E612}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2AAFA030-DD23-484B-8B10-692FFE14220E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AAFA030-DD23-484B-8B10-692FFE14220E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AAFA030-DD23-484B-8B10-692FFE14220E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E14292B-0648-4B51-9364-4467D6D3E612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E14292B-0648-4B51-9364-4467D6D3E612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E14292B-0648-4B51-9364-4467D6D3E612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E14292B-0648-4B51-9364-4467D6D3E612}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
