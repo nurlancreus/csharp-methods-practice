@@ -36,12 +36,9 @@ namespace OOP_part2
                     }
                     return text;
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message);
-                    Console.ResetColor();
+                    throw;
                 }
             }
         }

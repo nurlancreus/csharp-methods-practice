@@ -8,14 +8,19 @@ namespace OOP_part2.Entities
 {
     internal class BankAccount
     {
-        private string _id = Guid.NewGuid().ToString();
+        private string _id;
         private decimal _balance = 0;
         private decimal _loan = 0;
         private string _loanPurpose = "";
 
+        public BankAccount()
+        {
+            _id = Guid.NewGuid().ToString();
+        }
+
         public decimal Balance
         {
-            get => _balance; set { _balance = value; }
+            get => _balance; private set { _balance = value; }
         }
 
         public decimal Loan
