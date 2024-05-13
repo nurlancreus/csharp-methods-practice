@@ -13,12 +13,20 @@ namespace BoltFood.Core.Models.BaseModel
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
+        private static int _productCount = 0;
+        private static int _restaurantCount = 0;
         private static int _count = 0;
 
-        public BaseEntity()
+        public BaseEntity(string type)
         {
-
-            Id = ++_count;
+            if (type == "restaurant")
+            {
+                Id = ++_restaurantCount;
+            }
+            else if (type == "product")
+            {
+                Id = ++_productCount;
+            };
 
         }
     }

@@ -15,7 +15,7 @@ namespace BoltFood.CoreModels
         public string Phone { get; set; }
         public List<Product> Products { get; set; }
 
-        public Restaurant()
+        public Restaurant() : base("restaurant")
         {
             Products = new List<Product>();
         }

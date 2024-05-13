@@ -11,6 +11,9 @@ namespace BoltFood.Core.Models
 {
     public class Product : BaseEntity
     {
+        public Product() : base("product")
+        {
+        }
 
         public double Price { get; set; }
         public string Description { get; set; }

@@ -15,21 +15,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP-part2-tasks", "OOP-part
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP-part3-tasks", "OOP-3-tasks\OOP-part3-tasks.csproj", "{B9E40BA0-C6BA-4E0C-B44A-8505ADA07E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course.App", "Project.App\Course.App.csproj", "{EEF51722-0438-482C-BC5F-2DEAFCA578E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Course.App", "Project.App\Course.App.csproj", "{EEF51722-0438-482C-BC5F-2DEAFCA578E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course.Core", "Course.Core\Course.Core.csproj", "{10A272CC-D998-4605-9019-1FF79418115C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Course.Core", "Course.Core\Course.Core.csproj", "{10A272CC-D998-4605-9019-1FF79418115C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course.Data", "Course.Data\Course.Data.csproj", "{F1D13BAD-BC66-4709-9E29-D227F9C9003C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Course.Data", "Course.Data\Course.Data.csproj", "{F1D13BAD-BC66-4709-9E29-D227F9C9003C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course.Service", "Course.Service\Course.Service.csproj", "{66996C06-C810-453B-A20E-63FEF7BD1243}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Course.Service", "Course.Service\Course.Service.csproj", "{66996C06-C810-453B-A20E-63FEF7BD1243}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoltFood.App", "BoltFood\BoltFood.App.csproj", "{E9FEAC54-1F81-4374-8587-D40F6CC0C1BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoltFood.App", "BoltFood\BoltFood.App.csproj", "{E9FEAC54-1F81-4374-8587-D40F6CC0C1BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoltFood.Data", "BoldFood.Data\BoltFood.Data.csproj", "{C4EABD2C-0365-4184-94EB-E688A0060C45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoltFood.Data", "BoldFood.Data\BoltFood.Data.csproj", "{C4EABD2C-0365-4184-94EB-E688A0060C45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoltFood.Core", "BoldFood.Core\BoltFood.Core.csproj", "{1A65205C-931B-4240-BE30-E618A0E57EA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoltFood.Core", "BoldFood.Core\BoltFood.Core.csproj", "{1A65205C-931B-4240-BE30-E618A0E57EA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoltFood.Service", "BoldFood.Service\BoltFood.Service.csproj", "{8BF5B921-C769-440D-82C0-066C7A0AB2C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoltFood.Service", "BoldFood.Service\BoltFood.Service.csproj", "{8BF5B921-C769-440D-82C0-066C7A0AB2C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Commerce.App", "E-Commerce.App\E-Commerce.App.csproj", "{A3281076-50D9-4DBD-A345-1EDE738FBC15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Commerce.Core", "E-Commerce.Core\E-Commerce.Core.csproj", "{3648AB03-448A-480A-9CAA-85CC4AF83695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Commerce.Data", "E-Commerce.Data\E-Commerce.Data.csproj", "{97F4CD7F-9DA7-4D9A-B2B7-DC978A65ABD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Commerce.Service", "E-Commerce.Service\E-Commerce.Service.csproj", "{E749DDF4-40EC-4EE1-9AE9-13C962AD8C80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +101,22 @@ Global
 		{8BF5B921-C769-440D-82C0-066C7A0AB2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BF5B921-C769-440D-82C0-066C7A0AB2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BF5B921-C769-440D-82C0-066C7A0AB2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3281076-50D9-4DBD-A345-1EDE738FBC15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3281076-50D9-4DBD-A345-1EDE738FBC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3281076-50D9-4DBD-A345-1EDE738FBC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3281076-50D9-4DBD-A345-1EDE738FBC15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3648AB03-448A-480A-9CAA-85CC4AF83695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3648AB03-448A-480A-9CAA-85CC4AF83695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3648AB03-448A-480A-9CAA-85CC4AF83695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3648AB03-448A-480A-9CAA-85CC4AF83695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F4CD7F-9DA7-4D9A-B2B7-DC978A65ABD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F4CD7F-9DA7-4D9A-B2B7-DC978A65ABD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F4CD7F-9DA7-4D9A-B2B7-DC978A65ABD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F4CD7F-9DA7-4D9A-B2B7-DC978A65ABD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E749DDF4-40EC-4EE1-9AE9-13C962AD8C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E749DDF4-40EC-4EE1-9AE9-13C962AD8C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E749DDF4-40EC-4EE1-9AE9-13C962AD8C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E749DDF4-40EC-4EE1-9AE9-13C962AD8C80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
