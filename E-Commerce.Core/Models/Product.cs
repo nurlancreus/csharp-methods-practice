@@ -9,11 +9,21 @@ namespace E_Commerce.Core.Models
 {
     public class Product : BaseEntity
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int Stock { get; set; }
-        public double Price { get; set; }
-        public Shop Shop { get; set; }
-        public ProductCategory category { get; set; }
+
+        public Product() : base("product")
+        {
+
+        }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int Stock { get; set; } = 0;
+        public double Price { get; set; } = 0;
+        public Shop? Shop { get; set; } = null;
+        public ProductCategory? Category { get; set; } = null;
+
+        public override string ToString()
+        {
+            return $"Id: {Id} - Name: {Name} - Description: {Description} - Stocks: {Stock} - Price: {Price} - Shop: {Shop?.Name} - Category: {Category?.Name} - Created: {CreatedAt}";
+        }
     }
 }

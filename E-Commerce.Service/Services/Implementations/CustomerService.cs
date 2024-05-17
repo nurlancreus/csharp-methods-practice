@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Core.Models;
 using E_Commerce.Data.Repositories.Implementations;
 using E_Commerce.Data.Repositories.Interfaces;
+using E_Commerce.Service.Helpers;
 using E_Commerce.Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,38 +13,27 @@ namespace E_Commerce.Service.Services.Implementations
 {
     public class CustomerService : ICustomerService
     {
-        private readonly CustomerRepository _customerRepository = new CustomerRepository();
+        private readonly ICustomerRepository _customerRepository = new CustomerRepository();
         public void Add()
         {
-            Console.Write("Enter Name: ");
-            string name = Console.ReadLine();
+            (string name, string surname, string address, string phone) = GetFields();
 
-            Console.Write("Surname: ");
-            string surname = Console.ReadLine();
+            Customer customer = new() { Name = name, Surname = surname, Address = address, Phone = phone, CreatedAt = DateTime.Now };
 
-            Console.Write("Addres: ");
-            string address = Console.ReadLine();
-
-            Console.Write("Phone: ");
-            string phone = Console.ReadLine();
-
-            _customerRepository.Add(new() { Name = name, Surname = surname, Address = address, Phone = phone, CreatedAt = DateTime.Now });
+            _customerRepository.Add(customer);
         }
 
         public void Delete()
         {
-            Console.WriteLine("Enter Customer Id: ");
 
+            int id = (int)Utilities.ReadNumber("Enter Customer Id");
             try
             {
-                if (int.TryParse(Console.ReadLine(), out int id))
-                {
-                    _customerRepository.Delete(id);
-                }
+                _customerRepository.Delete(id);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.ExceptionConsole(ex.Message);
             }
 
         }
@@ -53,69 +43,63 @@ namespace E_Commerce.Service.Services.Implementations
             List<Customer> customers = _customerRepository.GetAll();
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer.ToString());
+                Console.WriteLine(customer);
             }
         }
 
         public void GetById()
         {
-            Console.WriteLine("Enter Customer Id: ");
-
+            int id = (int)Utilities.ReadNumber("Enter Customer Id");
             try
             {
-                if (int.TryParse(Console.ReadLine(), out int id))
-                {
-                    Customer? customer = _customerRepository.GetById(id);
+                Customer? customer = _customerRepository.GetById(id);
 
-                    if (customer != null)
-                        Console.WriteLine(customer.ToString());
-                }
+                if (customer is not null)
+                    Console.WriteLine(customer);
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.ExceptionConsole(ex.Message);
             }
         }
 
         public void Update()
         {
-            Console.Write("Enter Name: ");
-            string name = Console.ReadLine();
-
-            Console.Write("Surname: ");
-            string surname = Console.ReadLine();
-
-            Console.Write("Addres: ");
-            string address = Console.ReadLine();
-
-            Console.Write("Phone: ");
-            string phone = Console.ReadLine();
-
-            Console.WriteLine("Enter Customer Id: ");
-
+            int id = (int)Utilities.ReadNumber("Enter Customer Id");
             try
             {
-                if (int.TryParse(Console.ReadLine(), out int id))
+                Customer? customer = _customerRepository.GetById(id);
+
+                (string name, string surname, string address, string phone) = GetFields();
+
+                if (customer is not null)
                 {
-                    Customer? customer = _customerRepository.GetById(id);
+                    customer.Name = name;
+                    customer.Surname = surname;
+                    customer.Address = address;
+                    customer.Phone = phone;
+                    customer.UpdatedAt = DateTime.Now;
 
-                    if (customer != null)
-                    {
-                        customer.Name = name;
-                        customer.Surname = surname;
-                        customer.Address = address;
-                        customer.Phone = phone;
-                        customer.UpdatedAt = DateTime.Now;
-
-                        _customerRepository.Update(customer);
-                    }
+                    _customerRepository.Update(customer);
                 }
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.ExceptionConsole(ex.Message);
             }
 
+        }
+
+        private static (string name, string surname, string address, string phone) GetFields()
+        {
+            string name = Utilities.ReadString("Enter Name");
+            string surname = Utilities.ReadString("Surname");
+            string address = Utilities.ReadString("Address");
+            string phone = Utilities.ReadString("Phone");
+
+            return (name, surname, address, phone);
         }
     }
 }

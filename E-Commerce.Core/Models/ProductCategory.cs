@@ -9,6 +9,16 @@ namespace E_Commerce.Core.Models
 {
     public class ProductCategory : BaseEntity
     {
-        public string Name { get; set; }
+
+        public ProductCategory() : base("productCategory")
+        {
+
+        }
+        public string Name { get; set; } = String.Empty;
+
+        public override string ToString()
+        {
+            return $"Id: {Id} - Category: {Name} - Created: {CreatedAt}";
+        }
     }
 }

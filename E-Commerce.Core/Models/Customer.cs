@@ -9,10 +9,14 @@ namespace E_Commerce.Core.Models
 {
     public class Customer : BaseEntity
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
+        public Customer() : base("customer")
+        {
+        }
+
+        public string Name { get; set; } = String.Empty;
+        public string Surname { get; set; } = String.Empty;
+        public string Address { get; set; } = String.Empty;
+        public string Phone { get; set; } = String.Empty; 
 
         public override string ToString()
         {

@@ -10,6 +10,10 @@ namespace E_Commerce.Core.Models
 {
     public class Order : BaseEntity
     {
+        public Order() : base("order")
+        {
+            
+        }
         Customer customer {  get; set; }
         OrderStatus status { get; set; }
 
