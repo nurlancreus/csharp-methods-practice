@@ -1,4 +1,5 @@
-﻿using E_Commerce.Service.Services.Interfaces;
+﻿using E_Commerce.Service.Helpers;
+using E_Commerce.Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,6 @@ namespace E_Commerce.Service.Services.Implementations
     {
         private static void SubMenu(IService service)
         {
-
-            CustomerService customerService = new CustomerService();
 
             //string type = service.GetType().Name.Split("Service")[0];
 
@@ -27,79 +26,88 @@ namespace E_Commerce.Service.Services.Implementations
             // Now 'typeWithoutService' will contain the part of the type name before "Service"
             string type = typeWithoutService;
 
-            bool isOperationDone = false;
+            bool isOperationsDone = false;
 
-            while (!isOperationDone)
+            while (!isOperationsDone)
             {
-                Console.WriteLine($"1.Add {type}.\n2.Update {type}.\n3.Delete {type}.\n4.Get {type} by Id.\n5.Get All {type}s.\n0.Exit {type} Menu");
+                Console.WriteLine($"1.Add {type}.\n" +
+                    $"2.Update {type}.\n" +
+                    $"3.Delete {type}.\n" +
+                    $"4.Get {type} by Id.\n" +
+                    $"5.Get All {type}s.\n" +
+                    $"0.Exit {type} Menu");
                 Console.Write("Enter operation number: ");
                 int.TryParse(Console.ReadLine(), out int userChoice);
-
 
                 switch (userChoice)
                 {
                     case 1:
-                        customerService.Add();
+                        service.Add();
                         break;
                     case 2:
-                        customerService.Update();
+                        service.Update();
                         break;
                     case 3:
-                        customerService.Delete();
+                        service.Delete();
                         break;
                     case 4:
-                        customerService.GetById();
+                        service.GetById();
                         break;
                     case 5:
-                        customerService.GetAll();
+                        service.GetAll();
                         break;
                     case 0:
-                        isOperationDone = true;
+                        isOperationsDone = true;
                         break;
                     default:
-                        Console.WriteLine("Enter valid operation number");
+                        Logger.ExceptionConsole("Enter valid operation number!!!");
                         break;
 
                 }
+
             }
 
         }
 
         public void ShowMenu()
         {
-            bool isOperationDone = false;
+            bool isOperationsDone = false;
 
-            while (!isOperationDone)
+            while (!isOperationsDone)
             {
-                Console.WriteLine("Choose Menu.\n1. Customer Menu."); 
-                
+                Console.WriteLine(
+                     "1.Customer Menu\n" +
+                     "2.Shop Menu\n" +
+                     "3.Product Menu\n" +
+                     "4.Product Category Menu\n" +
+                     "0.Exit Program");
+
                 Console.Write("Enter operation number: ");
                 int.TryParse(Console.ReadLine(), out int userChoice);
-
 
                 switch (userChoice)
                 {
                     case 1:
-                        CustomerService customerService = new CustomerService();
+                        ICustomerService customerService = new CustomerService();
                         SubMenu(customerService);
                         break;
                     case 2:
-                    
+                        IShopService shopService = new ShopService();
+                        SubMenu(shopService);
                         break;
                     case 3:
-                     
+                        IProductService productService = new ProductService();
+                        SubMenu(productService);
                         break;
                     case 4:
-                        
-                        break;
-                    case 5:
-                      
+                        IProductCategoryService productCategoryService = new ProductCategoryService();
+                        SubMenu(productCategoryService);
                         break;
                     case 0:
-                        isOperationDone = true;
+                        isOperationsDone = false;
                         break;
                     default:
-                        Console.WriteLine("Enter valid operation number");
+                        Logger.ExceptionConsole("Enter valid operation number!!!");
                         break;
 
                 }
