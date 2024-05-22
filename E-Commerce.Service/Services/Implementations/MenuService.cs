@@ -10,7 +10,7 @@ namespace E_Commerce.Service.Services.Implementations
 {
     public class MenuService : IMenuService
     {
-        private static void SubMenu(IService service)
+        private void SubMenu(IService service)
         {
 
             //string type = service.GetType().Name.Split("Service")[0];
@@ -28,6 +28,9 @@ namespace E_Commerce.Service.Services.Implementations
 
             bool isOperationsDone = false;
 
+            bool isOrderService = type == "Order";
+            string orderServiceChoice = isOrderService ? $"6.Change Order status.\n" : String.Empty;
+
             while (!isOperationsDone)
             {
                 Console.WriteLine($"1.Add {type}.\n" +
@@ -35,6 +38,8 @@ namespace E_Commerce.Service.Services.Implementations
                     $"3.Delete {type}.\n" +
                     $"4.Get {type} by Id.\n" +
                     $"5.Get All {type}s.\n" +
+                    orderServiceChoice +
+                    $"{(isOrderService ? "7" : "6")}.Back to menu\n" +
                     $"0.Exit {type} Menu");
                 Console.Write("Enter operation number: ");
                 int.TryParse(Console.ReadLine(), out int userChoice);
@@ -56,17 +61,37 @@ namespace E_Commerce.Service.Services.Implementations
                     case 5:
                         service.GetAll();
                         break;
+                    case 6:
+                        if (isOrderService)
+                        {
+                            Console.WriteLine("Change Order status.");
+                            // Here should be the logic to change the order status
+                        }
+                        else
+                        {
+                            ShowMenu();
+                            isOperationsDone = true;
+                        }
+                        break;
+                    case 7:
+                        if (isOrderService)
+                        {
+                            ShowMenu();
+                            isOperationsDone = true;
+                        }
+                        else
+                        {
+                            Logger.ExceptionConsole("Enter valid operation number!!!");
+                        }
+                        break;
                     case 0:
                         isOperationsDone = true;
                         break;
                     default:
                         Logger.ExceptionConsole("Enter valid operation number!!!");
                         break;
-
                 }
-
             }
-
         }
 
         public void ShowMenu()
@@ -80,6 +105,7 @@ namespace E_Commerce.Service.Services.Implementations
                      "2.Shop Menu\n" +
                      "3.Product Menu\n" +
                      "4.Product Category Menu\n" +
+                     "5.Order Menu\n" +
                      "0.Exit Program");
 
                 Console.Write("Enter operation number: ");
@@ -102,6 +128,10 @@ namespace E_Commerce.Service.Services.Implementations
                     case 4:
                         IProductCategoryService productCategoryService = new ProductCategoryService();
                         SubMenu(productCategoryService);
+                        break;
+                    case 5:
+                        IOrderService orderService = new OrderService();
+                        SubMenu(orderService);
                         break;
                     case 0:
                         isOperationsDone = false;

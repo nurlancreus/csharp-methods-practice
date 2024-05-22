@@ -12,10 +12,12 @@ namespace E_Commerce.Core.Models
     {
         public Order() : base("order")
         {
-            
+
         }
-        Customer customer {  get; set; }
-        OrderStatus status { get; set; }
+        public Customer Customer { get; set; }
+        public OrderStatus Status { get; set; }
+
+        public List<OrderProduct> OrderProducts  = new List<OrderProduct>();
 
     }
 }

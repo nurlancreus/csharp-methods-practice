@@ -10,7 +10,7 @@ namespace E_Commerce.Data.Repositories.Implementations
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private static readonly List<T> _entities = [];
+        protected static readonly List<T> _entities = [];
         public void Add(T entity) => _entities.Add(entity);
 
         public void Delete(int id)
@@ -20,7 +20,6 @@ namespace E_Commerce.Data.Repositories.Implementations
         }
 
         public List<T> GetAll() => _entities;
-
 
         public T? GetById(int id)
         {

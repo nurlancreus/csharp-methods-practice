@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Data.Repositories.Implementations
 {
-    public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
+    public class OrderRepository : GenericRepository<Order>, IOrderRepository
     {
-
     }
 }
