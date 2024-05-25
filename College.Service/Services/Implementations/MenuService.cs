@@ -16,6 +16,7 @@ namespace College.Service.Services.Implementations
 
             while (!isOperationsDone)
             {
+                Console.WriteLine("Welcome to the \"Jed\" College!\n");
                 Console.WriteLine("1. Groups Menu.\n" +
                     "2. Subjects Menu.\n" +
                     "3. Students Menu.\n" +
@@ -60,7 +61,6 @@ namespace College.Service.Services.Implementations
                 {
                     Logger.ExceptionConsole(ex.Message);
                 }
-
             }
         }
 

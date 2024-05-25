@@ -10,5 +10,9 @@ namespace College.Core.Models
     public class Subject() : BaseEntity(Table.Subject)
     {
         public string Name { get; set; } = string.Empty;
+        public override string ToString()
+        {
+            return $"Id: {Id} - Name: {Name}";
+        }
     }
 }

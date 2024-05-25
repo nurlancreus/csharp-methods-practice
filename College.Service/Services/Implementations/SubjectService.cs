@@ -48,8 +48,11 @@ namespace College.Service.Services.Implementations
         public async Task GetAllAsync()
         {
             Console.WriteLine("Get All Subjects\n");
+            List<Subject> subjects = await _subjectRepository.GetAllAsync();
+
             try
             {
+                if (subjects.Count == 0) throw new Exception("There are no subject in the repo.");
                 foreach (Subject subject in await _subjectRepository.GetAllAsync())
                 {
                     Console.WriteLine(subject);
@@ -64,12 +67,8 @@ namespace College.Service.Services.Implementations
         public async Task GetAsync()
         {
             Console.WriteLine("Get Subject\n");
-            List<Subject> subjects = await _subjectRepository.GetAllAsync();
-
             try
             {
-                if (subjects.Count == 0) throw new Exception("There are no subject in the repo.");
-
                 int id = (int)Utilities.ReadNumber("Enter the id of the subject you want to get: ");
                 Subject subject = await _subjectRepository.GetByIdAsync(id) ?? throw new EntryPointNotFoundException("Subject not found");
 
