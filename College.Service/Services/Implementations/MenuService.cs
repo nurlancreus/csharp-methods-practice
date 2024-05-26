@@ -16,15 +16,20 @@ namespace College.Service.Services.Implementations
 
             while (!isOperationsDone)
             {
+                Console.WriteLine("\n*******************************\n" +
+                    "*******************************\n" +
+                    "*******************************\n");
+
                 Console.WriteLine("Welcome to the \"Jed\" College!\n");
                 Console.WriteLine("1. Groups Menu.\n" +
                     "2. Subjects Menu.\n" +
                     "3. Students Menu.\n" +
                     "4. Teachers Menu.\n" +
                     "5. Grades Menu.\n" +
+                    "6. Teacher Group relations menu.\n" +
                     "0. Exit");
 
-                int userChoice = (int)Utilities.ReadNumber("Your choice: ");
+                int userChoice = (int)Utilities.ReadNumber("\nYour choice: ");
 
                 try
                 {
@@ -50,6 +55,10 @@ namespace College.Service.Services.Implementations
                             StudentGradeService studentGradeService = new StudentGradeService();
                             await Submenu(studentGradeService);
                             break;
+                        case 6:
+                            TeacherGroupService teacherGroupService = new TeacherGroupService();
+                            await Submenu(teacherGroupService);
+                            break;
                         case 0:
                             isOperationsDone = true;
                             break;
@@ -64,13 +73,28 @@ namespace College.Service.Services.Implementations
             }
         }
 
-        private async Task Submenu<T>(T service) where T : IService
+        private static async Task Submenu<T>(T service) where T : IService
         {
             string type = typeof(T).Name;
             string serviceName = type.EndsWith("Service") ? type[..^"Service".Length] : type;
-            serviceName = serviceName == "StudentGrade" ? "Student Grade" : serviceName;
+            serviceName = serviceName switch
+            {
+                "StudentGrade" => "Student Grade",
+                "TeacherGroup" => "Teacher Group relations",
+                _ => serviceName
+            };
 
-            Console.WriteLine(serviceName);
+            Console.WriteLine("\n*******************************\n");
+            Console.WriteLine($"\"{serviceName}\" Menu\n");
+
+            string extraChoice = serviceName switch
+            {
+                "Student" => $"6. Get {serviceName}'s grades.\n",
+                "Group" => $"6. Get {serviceName}'s teachers.\n",
+                "Teacher" => $"6. Get {serviceName}'s groups.\n" +
+                             $"7. Get {serviceName}'s subjects.\n",
+                _ => ""
+            };
 
             bool isOperationsDone = false;
 
@@ -81,9 +105,10 @@ namespace College.Service.Services.Implementations
                     $"3. Delete {serviceName}.\n" +
                     $"4. Get {serviceName} by Id.\n" +
                     $"5. Get all {serviceName}s.\n" +
+                    extraChoice +
                     $"0. Exit \"{serviceName}\" menu.");
 
-                int userChoice = (int)Utilities.ReadNumber("Your choice: ");
+                int userChoice = (int)Utilities.ReadNumber("\nYour choice: ");
 
                 try
                 {
@@ -104,6 +129,26 @@ namespace College.Service.Services.Implementations
                         case 5:
                             await service.GetAllAsync();
                             break;
+                        case 6:
+                            await HandleExtraChoice(service, serviceName);
+                            break;
+                        case 7:
+                            if (serviceName == "Teacher")
+                            {
+                                if (service is ITeacherService teacherService)
+                                {
+                                    await teacherService.GetTeacherGroupsAsync("subjects");
+                                }
+                                else
+                                {
+                                    throw new Exception("Invalid service type for teacher subjects operation");
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("Choose the correct option");
+                            }
+                            break;
                         case 0:
                             isOperationsDone = true;
                             break;
@@ -116,6 +161,31 @@ namespace College.Service.Services.Implementations
                     Logger.ExceptionConsole(ex.Message);
                 }
             }
+        }
+
+        private static async Task HandleExtraChoice<T>(T service, string serviceName) where T : IService
+        {
+            if (serviceName == "Student" || serviceName == "Group" || serviceName == "Teacher")
+            {
+                if (service is IStudentService studentService)
+                {
+                    await studentService.GetStudentGradesAsync();
+                }
+                else if (service is IGroupService groupService)
+                {
+                    await groupService.GetGroupTeachersAsync();
+                }
+                else if (service is ITeacherService teacherService)
+                {
+                    await teacherService.GetTeacherGroupsAsync("groups");
+                }
+                else
+                {
+                    throw new Exception("Invalid service type for extra operation");
+                }
+            }
+            else throw new Exception("Choose the correct option");
+
         }
     }
 }

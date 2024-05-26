@@ -8,5 +8,6 @@ namespace College.Service.Services.Interfaces
 {
     public interface IStudentService : IService
     {
+        public Task GetStudentGradesAsync();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using College.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,11 @@ namespace College.Service.Helpers
                     Logger.ExceptionConsole(ex.Message);
                 }
             }
+        }
+
+        public static string FormatGrade(Grade grade)
+        {
+            return grade.ToString().Replace("_Plus", "+").Replace("_Minus", "-");
         }
     }
 }

@@ -9,6 +9,8 @@ namespace College.Core.Models
 {
     public class TeacherGroup() : BaseEntity(Table.TeacherGroup)
     {
-
+        public int TeacherId { get; set; }
+        public int GroupId { get; set; }
+        public int SubjectId { get; set; }
     }
 }

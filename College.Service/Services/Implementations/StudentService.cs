@@ -16,6 +16,8 @@ namespace College.Service.Services.Implementations
     {
         private readonly IStudentRepository _studentRepository = new StudentRepository();
         private readonly IGroupRepository _groupRepository = new GroupRepository();
+        private readonly IStudentGradeRepository _studentGradeRepository = new StudentGradeRepository();
+        private readonly ISubjectRepository _subjectRepository = new SubjectRepository();
         public async Task AddAsync()
         {
             Console.WriteLine("Add Student\n");
@@ -23,7 +25,7 @@ namespace College.Service.Services.Implementations
             {
                 (string firstName, string lastName, string fatherName, string finCode, int groupId) = await GetStudentDataAsync();
 
-                Group group = await _groupRepository.GetByIdAsync(groupId) ?? throw new EntityNotFoundException("Group not found");
+                Group group = await _groupRepository.GetByIdAsync(groupId) ?? throw new EntityNotFoundException("Group Not Found");
                 Student student = new()
                 {
                     FirstName = firstName,
@@ -50,7 +52,7 @@ namespace College.Service.Services.Implementations
             Console.WriteLine("Delete Student\n");
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the student you want to delete: ");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the student you want to delete: ");
                 bool studentDeleted = await _studentRepository.DeleteAsync(id);
 
                 if (!studentDeleted) throw new EntityNotFoundException("Could not delete the student.");
@@ -89,8 +91,8 @@ namespace College.Service.Services.Implementations
 
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the student you want to get: ");
-                Student student = await _studentRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Student not found");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the student you want to get: ");
+                Student student = await _studentRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Student Not Found");
                 Console.WriteLine(student);
 
             }
@@ -100,19 +102,43 @@ namespace College.Service.Services.Implementations
             }
         }
 
+        public async Task GetStudentGradesAsync()
+        {
+            Console.WriteLine("Get Student Grades\n");
+
+            List<StudentGrade> studentsGrades = await _studentGradeRepository.GetAllAsync();
+
+            if (studentsGrades.Count == 0) throw new Exception("There are currently no grades at all.");
+
+            int id = (int)Utilities.ReadNumber("Enter the Id of the student you want to get grades of: ");
+
+            Student student = await _studentRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Student Not Found.");
+
+            List<StudentGrade> studentGrades = studentsGrades.FindAll(g => g.StudentId == id);
+
+            if (studentGrades.Count == 0) throw new EntityNotFoundException("Specific student got no grades right now.");
+
+            foreach (StudentGrade grade in studentGrades)
+            {
+                Subject subject = await _subjectRepository.GetByIdAsync(grade.SubjectId) ?? throw new EntityNotFoundException("Subject Not Found");
+
+                Console.WriteLine($"Student Fin: {student.FinCode} - Subject: {subject.Name} - Grade: {Utilities.FormatGrade(grade.Grade)}");
+            }
+        }
+
         public async Task UpdateAsync()
         {
             Console.WriteLine("Update Student\n");
 
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the student you want to update: ");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the student you want to update: ");
 
-                Student student = await _studentRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Student not found");
+                Student student = await _studentRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Student Not Found");
 
                 (string firstName, string lastName, string fatherName, string finCode, int groupId) = await GetStudentDataAsync();
 
-                Group group = await _groupRepository.GetByIdAsync(groupId) ?? throw new EntityNotFoundException("Group not found.");
+                Group group = await _groupRepository.GetByIdAsync(groupId) ?? throw new EntityNotFoundException("Group Not Found.");
 
                 student.FirstName = firstName;
                 student.LastName = lastName;
@@ -142,7 +168,7 @@ namespace College.Service.Services.Implementations
 
             if (finCode.Length != 7) throw new ArgumentOutOfRangeException("Fin Code's length should be 7");
 
-            int groupId = (int)Utilities.ReadNumber("Enter the id of the group where student studies: ");
+            int groupId = (int)Utilities.ReadNumber("Enter the Id of the group where student studies: ");
 
             return await Task.FromResult((firstName, lastName, fatherName, finCode, groupId));
         }

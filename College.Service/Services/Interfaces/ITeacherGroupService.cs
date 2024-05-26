@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace College.Service.Services.Interfaces
 {
-    public interface ITeacherGroup : IService
+    public interface ITeacherGroupService : IService
     {
     }
 }

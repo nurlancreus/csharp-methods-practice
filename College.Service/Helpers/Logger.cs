@@ -12,24 +12,28 @@ namespace College.Service.Helpers
         {
             Console.BackgroundColor = ConsoleColor.Red;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine(message);
+            Console.Write(message);
             Console.ResetColor();
+            Console.WriteLine();
         }
 
         public static void WarningConsole(string message)
         {
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine(message);
+            Console.Write(message);
             Console.ResetColor();
+            Console.WriteLine();
         }
 
         public static void SuccessConsole(string message)
         {
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine(message);
+            Console.Write(message);
             Console.ResetColor();
+            Console.WriteLine();
+
         }
     }
 }

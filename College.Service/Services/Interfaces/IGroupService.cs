@@ -8,5 +8,6 @@ namespace College.Service.Services.Interfaces
 {
     public interface IGroupService : IService
     {
+        public Task GetGroupTeachersAsync();
     }
 }

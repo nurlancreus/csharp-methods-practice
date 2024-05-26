@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace College.Service.Services.Implementations
 {
-    public class StudentGradeService : IStudentService
+    public class StudentGradeService : IStudentGradeService
     {
         private readonly IStudentGradeRepository _studentGradeRepository = new StudentGradeRepository();
         private readonly IStudentRepository _studentRepository = new StudentRepository();
@@ -50,7 +50,7 @@ namespace College.Service.Services.Implementations
 
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the grade you want to delete: ");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the grade you want to delete: ");
 
                 bool gradeDeleted = await _studentGradeRepository.DeleteAsync(id);
 
@@ -89,8 +89,8 @@ namespace College.Service.Services.Implementations
 
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the grade you want to get: ");
-                StudentGrade studentGrade = await _studentGradeRepository.GetByIdAsync(id) ?? throw new EntryPointNotFoundException("Grade not found");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the grade you want to get: ");
+                StudentGrade studentGrade = await _studentGradeRepository.GetByIdAsync(id) ?? throw new EntryPointNotFoundException("Grade Not Found");
 
                 await GetGradeDetailsAsync(studentGrade);
             }
@@ -104,8 +104,8 @@ namespace College.Service.Services.Implementations
         {
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the grade you want to update: ");
-                StudentGrade studentGrade = await _studentGradeRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Grade not found");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the grade you want to update: ");
+                StudentGrade studentGrade = await _studentGradeRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Grade Not Found");
                 (int studentId, int subjectId, Grade grade) = await GetStudentGradeDataAsync();
 
                 studentGrade.SubjectId = subjectId;
@@ -127,23 +127,23 @@ namespace College.Service.Services.Implementations
 
         private async Task GetGradeDetailsAsync(StudentGrade studentGrade)
         {
-            Student student = await _studentRepository.GetByIdAsync(studentGrade.StudentId) ?? throw new EntityNotFoundException("Student not found");
-            Subject subject = await _subjectRepository.GetByIdAsync(studentGrade.SubjectId) ?? throw new EntityNotFoundException("Subject not found");
+            Student student = await _studentRepository.GetByIdAsync(studentGrade.StudentId) ?? throw new EntityNotFoundException("Student Not Found");
+            Subject subject = await _subjectRepository.GetByIdAsync(studentGrade.SubjectId) ?? throw new EntityNotFoundException("Subject Not Found");
 
             Console.WriteLine($"Id: {studentGrade.Id} - " +
                 $"Student Fin code: {student.FinCode} - " +
                 $"Student: {student.FirstName + " " + student.LastName} - " +
                 $"Subject: {subject.Name} - " + 
-                $"Grade: {FormatGrade(studentGrade.Grade)}");
+                $"Grade: {Utilities.FormatGrade(studentGrade.Grade)}");
         }
 
         private async Task<(int studentId, int subjectId, Grade grade)> GetStudentGradeDataAsync()
         {
             int studentId = (int)Utilities.ReadNumber("Enter id of the student who grade belongs to: ");
-            Student student = await _studentRepository.GetByIdAsync(studentId) ?? throw new EntityNotFoundException("Student not found");
+            Student student = await _studentRepository.GetByIdAsync(studentId) ?? throw new EntityNotFoundException("Student Not Found");
 
             int subjectId = (int)Utilities.ReadNumber("Enter id of the subject which grade belongs to: ");
-            Subject subject = await _subjectRepository.GetByIdAsync(subjectId) ?? throw new EntityNotFoundException("Subject not found");
+            Subject subject = await _subjectRepository.GetByIdAsync(subjectId) ?? throw new EntityNotFoundException("Subject Not Found");
 
             bool isStudentAlreadyGotGrade = (await _studentGradeRepository.GetAllAsync()).Any(g => g.SubjectId == subjectId && g.StudentId == studentId);
             if (isStudentAlreadyGotGrade) throw new Exception($"Student ({student.FinCode}) already got his/her grade from subject \"{subject.Name}\"");
@@ -155,7 +155,7 @@ namespace College.Service.Services.Implementations
                 Console.WriteLine("Student Grades for scores: ");
                 foreach (Grade g in Enum.GetValues<Grade>())
                 {
-                    Console.WriteLine($"{(int)g}+ score: {FormatGrade(g)}");
+                    Console.WriteLine($"{(int)g}+ score: {Utilities.FormatGrade(g)}");
                 }
                 double studentScore = Utilities.ReadNumber("Enter student score: ");
 
@@ -188,9 +188,6 @@ namespace College.Service.Services.Implementations
             return (studentId, subjectId, grade);
         }
 
-        private string FormatGrade(Grade grade)
-        {
-            return grade.ToString().Replace("_Plus", "+").Replace("_Minus", "-");
-        }
+   
     }
 }

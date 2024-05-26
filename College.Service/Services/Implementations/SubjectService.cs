@@ -31,7 +31,7 @@ namespace College.Service.Services.Implementations
             Console.WriteLine("Delete Subject\n");
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the subject you want to delete: ");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the subject you want to delete: ");
 
                 bool subjectDeleted = await _subjectRepository.DeleteAsync(id);
 
@@ -53,7 +53,7 @@ namespace College.Service.Services.Implementations
             try
             {
                 if (subjects.Count == 0) throw new Exception("There are no subject in the repo.");
-                foreach (Subject subject in await _subjectRepository.GetAllAsync())
+                foreach (Subject subject in subjects)
                 {
                     Console.WriteLine(subject);
                 }
@@ -69,8 +69,8 @@ namespace College.Service.Services.Implementations
             Console.WriteLine("Get Subject\n");
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the subject you want to get: ");
-                Subject subject = await _subjectRepository.GetByIdAsync(id) ?? throw new EntryPointNotFoundException("Subject not found");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the subject you want to get: ");
+                Subject subject = await _subjectRepository.GetByIdAsync(id) ?? throw new EntryPointNotFoundException("Subject Not Found");
 
                 Console.WriteLine(subject);
             }
@@ -86,8 +86,8 @@ namespace College.Service.Services.Implementations
 
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the subject you want to update: ");
-                Subject subject = await _subjectRepository.GetByIdAsync(id) ?? throw new EntryPointNotFoundException("Subject not found");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the subject you want to update: ");
+                Subject subject = await _subjectRepository.GetByIdAsync(id) ?? throw new EntryPointNotFoundException("Subject Not Found");
 
                 string subjectName = Utilities.ReadString("Enter subject's name: ");
 

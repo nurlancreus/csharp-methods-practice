@@ -15,6 +15,8 @@ namespace College.Service.Services.Implementations
     public class GroupService : IGroupService
     {
         private readonly IGroupRepository _groupRepository = new GroupRepository();
+        private readonly ITeacherRepository _teacherRepository = new TeacherRepository();
+        private readonly ITeacherGroupRepository _teacherGroupRepository = new TeacherGroupRepository();
         public async Task AddAsync()
         {
             Console.WriteLine("Add Group\n");
@@ -30,7 +32,7 @@ namespace College.Service.Services.Implementations
             Console.WriteLine("Delete Group\n");
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the group you want to delete: ");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the group you want to delete: ");
                 bool groupDeleted = await _groupRepository.DeleteAsync(id);
 
                 if (!groupDeleted) throw new EntityNotFoundException("Could not delete the group.");
@@ -69,11 +71,43 @@ namespace College.Service.Services.Implementations
             Console.WriteLine("Get Group\n");
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the group you want to get: ");
-                Group group = await _groupRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Group not found.");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the group you want to get: ");
+                Group group = await _groupRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Group Not Found.");
 
                 Console.WriteLine(group);
 
+            }
+            catch (Exception ex)
+            {
+                Logger.ExceptionConsole(ex.Message);
+            }
+        }
+
+        public async Task GetGroupTeachersAsync()
+        {
+            List<TeacherGroup> teacherGroups = await _teacherGroupRepository.GetAllAsync();
+
+            try
+            {
+                if (teacherGroups.Count == 0) throw new Exception($"There are no Teacher group data now");
+
+                int id = (int)Utilities.ReadNumber($"Enter the Id of the group you want to get teachers of: ");
+                Group group = await _groupRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Group Not Found.");
+
+                List<TeacherGroup> foundteacherGroups = teacherGroups.FindAll(tg => tg.GroupId == id);
+
+                if (foundteacherGroups.Count == 0) throw new Exception($"Group \"{group.Name}\" got no teachers now.");
+
+                Console.WriteLine($"Get Teachers: ");
+
+                for (int i = 0; i < foundteacherGroups.Count; i++)
+                {
+                    TeacherGroup teacherGroup = foundteacherGroups[i];
+
+                    Teacher teacher = await _teacherRepository.GetByIdAsync(teacherGroup.TeacherId) ?? throw new EntityNotFoundException("Teacher Not Found.");
+                    Console.WriteLine($"{i + 1}. {teacher.FirstName + " " + teacher.LastName} - ({teacher.FinCode})");
+
+                }
             }
             catch (Exception ex)
             {
@@ -86,8 +120,8 @@ namespace College.Service.Services.Implementations
             Console.WriteLine("Update Group\n");
             try
             {
-                int id = (int)Utilities.ReadNumber("Enter the id of the group you want to update: ");
-                Group group = await _groupRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Group not found.");
+                int id = (int)Utilities.ReadNumber("Enter the Id of the group you want to update: ");
+                Group group = await _groupRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Group Not Found.");
                 (string name, string description) = await GetGroupDataAsync();
 
                 group.Name = name;
