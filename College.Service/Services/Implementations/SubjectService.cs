@@ -20,7 +20,7 @@ namespace College.Service.Services.Implementations
             Console.WriteLine("Add Subject\n");
             string subjectName = Utilities.ReadString("Enter subject's name: ");
 
-            Subject subject = new Subject() { Name = subjectName };
+            Subject subject = new () { Name = subjectName };
 
             await _subjectRepository.AddAsync(subject);
             Logger.SuccessConsole("Subject Added Successfully.");

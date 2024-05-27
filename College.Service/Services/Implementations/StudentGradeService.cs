@@ -27,7 +27,7 @@ namespace College.Service.Services.Implementations
             {
                 (int studentId, int subjectId, Grade grade) = await GetStudentGradeDataAsync();
 
-                StudentGrade studentGrade = new StudentGrade()
+                StudentGrade studentGrade = new()
                 {
                     StudentId = studentId,
                     SubjectId = subjectId,
@@ -133,7 +133,7 @@ namespace College.Service.Services.Implementations
             Console.WriteLine($"Id: {studentGrade.Id} - " +
                 $"Student Fin code: {student.FinCode} - " +
                 $"Student: {student.FirstName + " " + student.LastName} - " +
-                $"Subject: {subject.Name} - " + 
+                $"Subject: {subject.Name} - " +
                 $"Grade: {Utilities.FormatGrade(studentGrade.Grade)}");
         }
 
@@ -188,6 +188,6 @@ namespace College.Service.Services.Implementations
             return (studentId, subjectId, grade);
         }
 
-   
+
     }
 }

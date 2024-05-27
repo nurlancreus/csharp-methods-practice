@@ -15,7 +15,6 @@ namespace College.Data.Repositories.Implementations
         {
             _entities.Add(entity);
             await Task.CompletedTask;
-
         }
 
         public async Task<bool> DeleteAsync(int id)
