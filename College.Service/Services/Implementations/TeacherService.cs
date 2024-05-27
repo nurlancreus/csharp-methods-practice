@@ -128,7 +128,7 @@ namespace College.Service.Services.Implementations
                     else
                     {
                         Subject subject = await _subjectRepository.GetByIdAsync(teacherGroup.SubjectId) ?? throw new EntityNotFoundException("Subject Not Found.");
-                        Console.WriteLine($"{i}. {subject.Name}");
+                        Console.WriteLine($"{i+1}. {subject.Name}");
                     }
                 }
             }
